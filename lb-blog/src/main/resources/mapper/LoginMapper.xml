@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lb.blog.dao.LoginMapper">
+	<resultMap id="BaseResultMap"
+		type="com.lb.blog.dto.UserDto">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<select id="select" parameterType="com.lb.blog.dto.UserDto"
+		resultMap="BaseResultMap">
+		SELECT
+		id,
+		name
+		FROM tab1
+	</select>
+</mapper>
