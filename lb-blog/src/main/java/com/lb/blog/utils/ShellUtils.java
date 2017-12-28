@@ -7,8 +7,6 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.Vector;
 
-import org.junit.Test;
-
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.ChannelSftp;
@@ -118,7 +116,7 @@ public class ShellUtils {
 	 * 把original_dirname路径下的txt文件 含有hello的挪到target_dirname
 	 * (源文件都在test下 把符合条件的移到test1)
 	 */
-	@Test
+	//@Test
 	@SuppressWarnings("unchecked")
 	public void moveFiles(){
 		ShellUtils util=new ShellUtils();

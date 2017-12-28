@@ -36,7 +36,7 @@
     <!-- 转换器  MapperScannerConfigurer会把com.suning.schema.mabatisInterface下的包进行扫描 获取接口，通过代理创建Bean实例给Spring进行管理-->  
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
     	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>  
-        <property name="basePackage" value="com.lb.web.dao" />   
+        <property name="basePackage" value="com.lb.blog.dao" />   
     </bean>    
       
 </beans>  

@@ -13,8 +13,8 @@ import com.lb.blog.service.login.LoginServiceImpl;
 /**
  * 创建人: lb 日期:2017年4月6日 下午2:57:07
  */
-@Controller
-@RequestMapping("/hello")
+//@Controller
+//@RequestMapping("/hello")
 public class LoginController {
 
 	@Autowired

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.lb.blog.service.login;
 
 import com.lb.blog.dto.UserDto;

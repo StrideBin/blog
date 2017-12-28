@@ -36,7 +36,7 @@
 		<property name="triggers">
 			<list>
  		        <!--  定时发邮件任务触发器 -->
- 		        <ref bean="sendEmailTrigger"/>  
+ 		       <!--  <ref bean="sendEmailTrigger"/>   -->
  			</list>
 		</property>
 	</bean>

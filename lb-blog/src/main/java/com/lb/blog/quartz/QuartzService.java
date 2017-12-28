@@ -10,7 +10,7 @@ import com.lb.blog.service.mail.MailSendProcess;
  * @author liubin (it_liubin@163.com)
  * @date 2017年9月26日
  */
-@Component("quartzService")
+//@Component("quartzService")
 public class QuartzService {
 	
 	@Autowired
@@ -19,7 +19,8 @@ public class QuartzService {
 	 * 定时发送电子邮件
 	 */
 	public void sendEmail() {
-		mailSendProcess.sendEmail();
+		System.out.println("test");
+		//mailSendProcess.sendEmail();
 	}
 
 	

@@ -5,7 +5,7 @@
   <groupId>lb-blog</groupId>
   <artifactId>lb-blog</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
 
   <name>lb-blog</name>
   <url>http://maven.apache.org</url>
@@ -94,7 +94,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>4.2.4.RELEASE</version>
-			<scope>test</scope>
+			<!-- <scope>test</scope> -->
 		</dependency>
 		<!-- spring end -->
 
@@ -170,7 +170,18 @@
 			<artifactId>commons-lang3</artifactId><!-- StringUtils -->
 			<version>3.4</version>
 		</dependency>
-
+		
+		<!-- mongodb -->
+<!-- 		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-mongodb</artifactId>
+		    <version>1.10.6.RELEASE</version>
+		</dependency> -->
+<!-- 		<dependency>
+		    <groupId>org.mongodb</groupId>
+		    <artifactId>mongo-java-driver</artifactId>
+		    <version>3.4.2</version>
+		</dependency> -->
 	</dependencies>
 	<build>
 		<finalName>lb-blog</finalName>
