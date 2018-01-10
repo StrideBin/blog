@@ -34,10 +34,8 @@ public class MongoTest {
 		Query query = new Query();
 		List<Order> orders = new ArrayList<Order>();
 		orders.add(new Order(Direction.DESC, "updateDate"));
-		Sort sort = new Sort(orders);
 		pageable.setPagenumber(1);
 		pageable.setPagesize(10);
-		pageable.setSort(sort);
 		Long count = mongoTemplate.count(query, PageDto.class, "page");
 		System.out.println(count);
 		List<PageDto> list = mongoTemplate.find(query.with(pageable), PageDto.class, "page");

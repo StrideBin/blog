@@ -1,60 +1,154 @@
+var limit=5;//数据库查询条数 就是查询的这页有多少条 *
 
-var intervalId;				//INTERVAL
+var showPage=5;//初始化显示页数  就是页面初始化时候下面分页的项有多少个 比如showPage为4 则下面显示1-4页
 
-var limit=10;//数据库查询条数
+var pageId=1;//当前页码 当前在第几页 页面初始化时 从第一页开始查 *
 
-var showPage=10;//初始化显示页数
-
-var endPage=showPage;//当前最后页
-
-var pageId=1;//当前页码
-
-var orderBy="";
-
-var startPage=1;//当前起始页
+var startPage=1;//当前起始页 就是当前的页码从几开始  如果填2 就是2 3 4 5 6 这样
  
 var globeData="";//全局 
 
-var globeId="";
-
 var endPage=showPage;//当前最后页
-
-var inputLength=16;		//输入框可以输入长度
-
-var resourceId="";
-
-var curWwwPath = window.document.location.href;
-$(function() {
-	for (var i = 0; i < $(".list-group-item").length; i++) {
-	 	if(curWwwPath.indexOf($(".list-group-item")[i].children[0].id) > 0){
-	 		$(".list-group-item")[i].className="list-group-item active";
-	 	}
+function pagehelper(count,lmt){
+	
+	var endPage=showPage;//当前最后页
+	
+	 $(".pagination").html("");
+	 //如果总数<=预计查出每页的条数
+	 if(count<=lmt){
+		 startPage=1;
+	 }
+	 var pages="";
+	 var startLength=(pageId-1)*lmt+1;
+	 var endLength=startLength+globeData.length-1;
+	 if(globeData.length==0){
+		 startLength=0;
+		 endLength=0;
+	 }
+	
+	 pages+="<li class='disabled'><a data-original-title='' title=''>显示"+startLength+"到"+endLength+"条</a></li><li id='firstPage'><a data-original-title='' title=''>首页</a></li><li class='disabled'></li><li><a href='#' class='prePage'>&laquo;</a></li>";
+	 var nowPageCount;
+	 var pageCount=Math.ceil(count/lmt);//记录总页数
+	 
+	 //如果小于10页则显示现在搜出来的总页数
+	 //如果大于10页则直接用 nowPageCount=startPage+showPage;
+	 
+	 if(pageCount<=10){
+		 nowPageCount=pageCount;
+	 }else{
+		 nowPageCount=startPage+showPage-1;
+	 }
+	 
+	 
+	 for (var i = startPage; i < nowPageCount+1; i++) {
+		pages+="<li id="+i+"><a href='#' class='pages'>"+i+"</a></li>"
 	}
+	 pages+=" <li><a href='#' class='nextPage'>&raquo;</a></li><li id='lastPage'><a href='#'>末页</a></li><li class='disabled'><a data-original-title='' title=''>总共"+count+"条</a></li>"
+	 
+	 pages+="<li><select class='form-control' style='width:80px;float:left' id='pageSelect'><option value="+limit+">"+limit+"</option><option value=10>10</option><option value=25>25</option><option value=50>50</option><option value=100>100</option></select></li></ul>"
+	 $(".pagination").append(pages);  
+	
+	if(pageId!=null){
+	$("#"+pageId).addClass("active");
+	}
+	
+	//判断现在是第几页 然后和第一页最后一页对比 如果相同则设置首页末页不可点击
+	if(pageId==1){
+		$(".prePage")[0].parentElement.className="disabled";
+		$("#firstPage")[0].className="disabled";
+	}
+	if(pageCount==pageId||pageCount==0){
+		$(".nextPage")[0].parentElement.className="disabled";
+		$("#lastPage")[0].className="disabled";
+	}
+	 $(".pages").click(function(){
+		 pageId= $(this)[0].parentElement.id;
+		 if(pageId==endPage){
+			 if(endPage!=pageCount){
+			 startPage+=1;
+			 endPage+=1;
+			 }
+		 }
+		 if(pageId==startPage){
+			 if(startPage!=1){
+			 startPage-=1;
+			 endPage-=1;
+			 }
+		 }
+		 searchFormSubmit();
 
-	$(".levelSessionId").click(function(){
-		resourceId=$(this).attr("id");
-	})
-	$(".orderBy").click(function(){
-		if(orderBy.indexOf(",")){orderBy=orderBy.split(",")[0]}
+		 
+	 })
+		$("#pageSelect").change(function (){
+			limit=$(this).val();
+			 startPage=1;
+			 pageId=1;
+			searchFormSubmit();
+   	});
+	 $(".prePage").click(function(){
+		 if($(this)[0].parentElement.className=='disabled'){
+			 return;
+		 }
+		 if(pageId>1){
+			 pageId--;
+			 if((pageId)!=(startPage-1)){
+				 if(startPage!=1){
+				 startPage-=1;
+				 endPage-=1;
+				 }
+			 }
+			 searchFormSubmit();
+		 }
+		 
+	 })
+	 $(".nextPage").click(function(){
+		 //當前最後一頁( •̀ ω •́ )y
+		 if($(this)[0].parentElement.className=='disabled'){
+			 return;
+		 }
+		 if(pageCount!=pageId){
+			 pageId++;
+			 if(endPage!=pageCount){
+			 startPage+=1;
+			 endPage+=1;
+			 }
+		 searchFormSubmit();
+		 }
+	 })
+	 $("#firstPage").click(function(){
+		 if($(this)[0].className=='disabled'){
+			 return;
+		 }
+		 if(pageId==1){return ;}
+		 pageId=1;
+		 startPage=1;
+		 endPage=showPage;
+		 searchFormSubmit();
+	 })
+	 $("#lastPage").click(function(){
 		
-		orderBy==$(this).attr("id")?orderBy=orderBy+" desc":orderBy=$(this).attr("id");
-		if (orderBy==$(this).attr("id")){
-		$(this)[0].childNodes[1].className="pull-right glyphicon glyphicon-chevron-up";
-		}else{
-			$(this)[0].childNodes[1].className="pull-right glyphicon glyphicon-chevron-down";
-		}	
-		searchFormSubmit();	
-	})
-/*	$(".list-group-item a").click(function(){
-	     $(this)[0].parentElement.className="list-group-item active";
-	     var id=$(this).attr("id");
-	 	if(curWwwPath.indexOf(id) > 0){
-	 		
-	 	}
-	})*/
-	/**
-	 * 加载动画模态框的位置计算 放在屏幕中间显示
-	 */
+		 if($(this)[0].className=='disabled'){
+			 return;
+		 }
+		 if(pageCount==pageId){
+			 return;}
+		 pageId=pageCount;
+		 
+		 startPage=pageCount-showPage+1;
+		 if(pageCount<showPage){
+			 startPage=1;
+		 }
+		 endPage=pageCount;
+		 searchFormSubmit();
+	 })
+	 }
+
+
+
+$(function() {
+/**
+ * 加载动画模态框的位置计算 放在屏幕中间显示
+ */
 $('#loadingModal').css(
 		{
 			'margin-top' : function() {
@@ -119,34 +213,6 @@ function formatDateDetail(data) {
 	var second = now.getSeconds();
 	return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":"
 			+ second;
-}
-/**
- * 等待动画开始
- */
-function loadingStart() {
-	timeInterval = 0;
-	intervalId = setInterval(function() {
-		timeInterval += 360;
-		$("#loadingImgBottom").css({
-			"-moz-transform" : "rotate(" + timeInterval + "deg)",
-			"-webkit-transform" : "rotate(" + timeInterval + "deg)",
-			"-o-transform" : "rotate(" + timeInterval + "deg)",
-			"-ms-transform" : "rotate(" + timeInterval + "deg)",
-			"transform" : "rotate(" + timeInterval + "deg)"
-		});
-	}, 1000);
-	$('#loadingModal').modal({
-		keyboard : false,
-		backdrop : 'static'
-	});
-}
-
-/**
- * 等待动画结束
- */
-function loadingEnd() {
-	$('#loadingModal').modal('hide');
-	clearInterval(intervalId);
 }
 /**
  * json格式数据null转""
@@ -376,18 +442,6 @@ function emptyToNull(obj){
 
 
 /**
- * 
- * 检查输入长度
- * @param obj
- * @returns {Boolean}
- */
-function  checkLength(obj){
-	if (obj.length>=inputLength){
-		return false;
-	}
-	return true;
-}
-/**
  * 检查是否为手机号码
  */
 function checkPhoneNumber(obj){
@@ -540,135 +594,7 @@ function onCheck(event, resourceTree, treeNode){
 	}
 } 
 
-function pagehelper(count,lmt){
-	 $(".pagination").html("");
-	 if(count<=lmt){
-		 startPage=1;
-	 }
-	 var pages="";
-	 var startLength=(pageId-1)*lmt+1;
-	 var endLength=startLength+globeData.length-1;
-	 if(globeData.length==0){
-		 startLength=0;
-		 endLength=0;
-	 }
-	
-	 pages+="<li class='disabled'><a data-original-title='' title=''>显示"+startLength+"到"+endLength+"条</a></li><li id='firstPage'><a data-original-title='' title=''>首页</a></li><li class='disabled'></li><li><a href='#' class='prePage'>&laquo;</a></li>";
-	 var nowPageCount;
-	 var pageCount=Math.ceil(count/lmt);//记录总页数
-	 
-	 //如果小于10页则显示现在搜出来的总页数
-	 //如果大于10页则直接用 nowPageCount=startPage+showPage;
-	 
-	 if(pageCount<=10){
-		 nowPageCount=pageCount;
-	 }else{
-		 nowPageCount=startPage+showPage-1;
-	 }
-	 
-	 
-	 for (var i = startPage; i < nowPageCount+1; i++) {
-		pages+="<li id="+i+"><a href='#' class='pages'>"+i+"</a></li>"
-	}
-	 pages+=" <li><a href='#' class='nextPage'>&raquo;</a></li><li id='lastPage'><a href='#'>末页</a></li><li class='disabled'><a data-original-title='' title=''>总共"+count+"条</a></li>"
-	 
-	 pages+="<li><select class='form-control' style='width:80px;float:left' id='pageSelect'><option value="+limit+">"+limit+"</option><option value=10>10</option><option value=25>25</option><option value=50>50</option><option value=100>100</option></select></li></ul>"
-	 $(".pagination").append(pages);  
-	
-	if(pageId!=null){
-	$("#"+pageId).addClass("active");
-	}
-	
-	//判断现在是第几页 然后和第一页最后一页对比 如果相同则设置首页末页不可点击
-	/*if(pageId==1){
-		$(".prePage")[0].parentElement.className="disabled";
-		$("#firstPage")[0].className="disabled";
-	}
-	if(pageCount==pageId||pageCount==0){
-		$(".nextPage")[0].parentElement.className="disabled";
-		$("#lastPage")[0].className="disabled";
-	}
-	 $(".pages").click(function(){
-		 pageId= $(this)[0].parentElement.id;
-		 if(pageId==endPage){
-			 if(endPage!=pageCount){
-			 startPage+=1;
-			 endPage+=1;
-			 }
-		 }
-		 if(pageId==startPage){
-			 if(startPage!=1){
-			 startPage-=1;
-			 endPage-=1;
-			 }
-		 }
-		 searchFormSubmit();
 
-		 
-	 })
-		$("#pageSelect").change(function (){
-			limit=$(this).val();
-			 startPage=1;
-			 pageId=1;
-			searchFormSubmit();
-    	});
-	 $(".prePage").click(function(){
-		 if($(this)[0].parentElement.className=='disabled'){
-			 return;
-		 }
-		 if(pageId>1){
-			 pageId--;
-			 if((pageId)!=(startPage-1)){
-				 if(startPage!=1){
-				 startPage-=1;
-				 endPage-=1;
-				 }
-			 }
-			 searchFormSubmit();
-		 }
-		 
-	 })
-	 $(".nextPage").click(function(){
-		 //當前最後一頁( •̀ ω •́ )y
-		 if($(this)[0].parentElement.className=='disabled'){
-			 return;
-		 }
-		 if(pageCount!=pageId){
-			 pageId++;
-			 if(endPage!=pageCount){
-			 startPage+=1;
-			 endPage+=1;
-			 }
-		 searchFormSubmit();
-		 }
-	 })
-	 $("#firstPage").click(function(){
-		 if($(this)[0].className=='disabled'){
-			 return;
-		 }
-		 if(pageId==1){return ;}
-		 pageId=1;
-		 startPage=1;
-		 endPage=showPage;
-		 searchFormSubmit();
-	 })
-	 $("#lastPage").click(function(){
-		
-		 if($(this)[0].className=='disabled'){
-			 return;
-		 }
-		 if(pageCount==pageId){
-			 return;}
-		 pageId=pageCount;
-		 
-		 startPage=pageCount-showPage+1;
-		 if(pageCount<showPage){
-			 startPage=1;
-		 }
-		 endPage=pageCount;
-		 searchFormSubmit();
-	 })*/
-	 }
 
 /**
  * 过滤查询需勾选的节点

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lb.blog.dto.PageDto;
+import com.lb.blog.dto.SpringDataPageable;
 import com.lb.blog.service.page.PageService;
 
 /**
@@ -22,8 +23,8 @@ public class MainPageController {
 	private PageService pageService;
 	@ResponseBody																	//如果不标注 前端ajax接收不到返回值
 	@RequestMapping(value = "/searchPaper", method = RequestMethod.POST)
-	public Object searchPaper(@RequestBody PageDto pageDto) { 						// @RequestBody 将前端的值转为json对象接收
-		Page<PageDto> page=pageService.queryAll();
+	public Object searchPaper(@RequestBody SpringDataPageable springDataPageable) { 						// @RequestBody 将前端的值转为json对象接收
+		Page<PageDto> page=pageService.queryAll(springDataPageable);
 		return page;
 	}
 }

@@ -1,15 +1,16 @@
 package com.lb.blog.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 
 /**
  * spring data 分页实现
- * 
- * @author shixiangwei
- * @date 2017/8/28
  */
 @SuppressWarnings("serial")
 public class SpringDataPageable implements Serializable, Pageable {
@@ -17,6 +18,11 @@ public class SpringDataPageable implements Serializable, Pageable {
 	private Integer pagesize = 10;
 	private Sort sort;
 
+	public SpringDataPageable(){
+		List<Order> orders = new ArrayList<Order>();
+		orders.add(new Order(Direction.DESC, "updateTime"));
+		this.sort = new Sort(orders);
+	}
 	@Override
 	public int getPageNumber() {
 		return getPagenumber();
@@ -73,7 +79,10 @@ public class SpringDataPageable implements Serializable, Pageable {
 		this.pagesize = pagesize;
 	}
 
-	public void setSort(Sort sort) {
+	public void setSort() {
+		List<Order> orders = new ArrayList<Order>();
+		orders.add(new Order(Direction.DESC, "updateDate"));
+		Sort sort = new Sort(orders);
 		this.sort = sort;
 	}
 }
