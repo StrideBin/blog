@@ -47,9 +47,9 @@ public class MongoTest {
 	@Test
 	public void testInsert() {
 		PageDto page=new PageDto();
-		page.setInsertDate(new Date().toString());
 		page.setPageTitle("Java虚拟机运行时数据区域");
 		page.setPageContent("程序计数器:说白了就是指示当前线程执行的字节码执行到哪了 (当前线程所执行的字节码的行号指示器 )");
 		mongoTemplate.insert(page,"page");
+		System.out.println(page.toString());
 	}
 }

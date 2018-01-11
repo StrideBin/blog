@@ -2,6 +2,7 @@ package com.lb.blog.service.page;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -28,6 +29,19 @@ public class PageServiceImpl implements PageService{
 		List<PageDto> list = mongoTemplate.find(query.with(pageable), PageDto.class, "page");
 		Page<PageDto> pagelist = new PageImpl<PageDto>(list, pageable, count);
 		return pagelist;
+	}
+	/**
+	 * 数据插入之后会在原对象生产obj id
+	 */
+	@Override
+	public boolean insertPage(PageDto pageDto) {
+		mongoTemplate.insert(pageDto);
+		if(StringUtils.isNotEmpty(pageDto.getId())){
+			return true;	
+		}else{
+			return false;
+		}
+		
 	}
 	
 }

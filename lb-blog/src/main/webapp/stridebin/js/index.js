@@ -1,6 +1,8 @@
 $(function() {
+	
+	
+	
 	searchFormSubmit();
-	// Navigation Menu
 	$(function() {
 		$(".menu ul").css({
 			display : "none"
@@ -36,26 +38,24 @@ function searchFormSubmit() {
 					console.info(data);
 				},
 				success : function(data) {
-					globeData = data.content;
+					var globeData = data.content;
 					var row = "";
 					for (var i = 0; i < globeData.length; i++) {
 						row += "<div><h3><a href=''>"
 								+ globeData[i].pageTitle
 								+ "</a></h3></div>"
 								+ "<ul><p>"
-								+ globeData[i].pageContent
+								+ intro(globeData[i].pageContent)
 								+ "</p>"
-								+ "<a id='readmore' title='"
-								+ globeData[i].pageTitle
-								+ "' href='' target='_blank' class='readmore'>阅读全文&gt;&gt;</a>"
+							    + "<a class='readmore'>阅读全文"
+							    + "<span class='caret'></span>"
+							    + "</a>"
 								+ "</ul>"
-								+ "<p class='dateview'><span id='"
-								+ globeData[i].insertDate
-								+ "'></span><span>个人博客：[<a href='/jstt/bj/'>心得笔记</a>]</span></p>"
+								+ "<p class='dateview'><span>"+globeData[i].insertTime+"</span>";
 					}
 					$("#page_rows").html("");
 					$("#page_rows").prepend(row);
-					pagehelper(data.totalElements, limit);
+					pagehelper(data.totalElements, limit,globeData.length);
 
 				}
 			});

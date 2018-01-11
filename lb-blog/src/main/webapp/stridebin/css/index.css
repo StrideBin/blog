@@ -67,12 +67,12 @@
 .dateview span a {
 	color: #41607d;
 }
-a.readmore {
-	background: #333;
-	color: #fff;
+.readmore {
 	padding: 5px 10px;
 	float: right;
-	margin: 20px 0 0 0
+	margin: 20px 0 0 0;
+	cursor:pointer;
+	text-decoration:none;
 }
 .r_box {
 	width: 300px;

@@ -5,14 +5,18 @@ var showPage=5;//初始化显示页数  就是页面初始化时候下面分页�
 var pageId=1;//当前页码 当前在第几页 页面初始化时 从第一页开始查 *
 
 var startPage=1;//当前起始页 就是当前的页码从几开始  如果填2 就是2 3 4 5 6 这样
- 
-var globeData="";//全局 
 
 var endPage=showPage;//当前最后页
-function pagehelper(count,lmt){
+
+/**
+ * 
+ * @param count 数据库中总数据数
+ * @param lmt   限制每次查询(每页)的条数
+ * @param dataLength 实际查出的数据量  dataL<=lmt
+ */
+function pagehelper(count,lmt,dataL){
 	
-	var endPage=showPage;//当前最后页
-	
+
 	 $(".pagination").html("");
 	 //如果总数<=预计查出每页的条数
 	 if(count<=lmt){
@@ -20,13 +24,13 @@ function pagehelper(count,lmt){
 	 }
 	 var pages="";
 	 var startLength=(pageId-1)*lmt+1;
-	 var endLength=startLength+globeData.length-1;
-	 if(globeData.length==0){
+	 var endLength=startLength+dataL-1;
+	 if(dataL==0){
 		 startLength=0;
 		 endLength=0;
 	 }
 	
-	 pages+="<li class='disabled'><a data-original-title='' title=''>显示"+startLength+"到"+endLength+"条</a></li><li id='firstPage'><a data-original-title='' title=''>首页</a></li><li class='disabled'></li><li><a href='#' class='prePage'>&laquo;</a></li>";
+	 pages+="<li id='firstPage'><a data-original-title='' title=''>首页</a></li><li class='disabled'></li><li><a href='#' class='prePage'>&laquo;</a></li>";
 	 var nowPageCount;
 	 var pageCount=Math.ceil(count/lmt);//记录总页数
 	 
@@ -43,9 +47,9 @@ function pagehelper(count,lmt){
 	 for (var i = startPage; i < nowPageCount+1; i++) {
 		pages+="<li id="+i+"><a href='#' class='pages'>"+i+"</a></li>"
 	}
-	 pages+=" <li><a href='#' class='nextPage'>&raquo;</a></li><li id='lastPage'><a href='#'>末页</a></li><li class='disabled'><a data-original-title='' title=''>总共"+count+"条</a></li>"
+	 pages+=" <li><a href='#' class='nextPage'>&raquo;</a></li><li id='lastPage'><a href='#'>末页</a></li>"
 	 
-	 pages+="<li><select class='form-control' style='width:80px;float:left' id='pageSelect'><option value="+limit+">"+limit+"</option><option value=10>10</option><option value=25>25</option><option value=50>50</option><option value=100>100</option></select></li></ul>"
+	 pages+="<li><select class='form-control' style='width:70px;float:left' id='pageSelect'><option value="+limit+">"+limit+"</option><option value=10>10</option><option value=20>20</option><option value=50>50</option></select></li></ul>"
 	 $(".pagination").append(pages);  
 	
 	if(pageId!=null){
@@ -196,6 +200,7 @@ function formatDate(data) {
 	var date = now.getDate();
 	return year + "-" + month + "-" + date;
 }
+
 /**
  * 
  * 时间戳转为日期公用方法(显示时分秒)
@@ -204,7 +209,7 @@ function formatDate(data) {
  */
 function formatDateDetail(data) {
 	if(data==""){return data;}
-	var now=new Date(data);
+	var now=new date(data);
 	var year = now.getFullYear();
 	var month = now.getMonth() + 1;
 	var date = now.getDate();
@@ -593,21 +598,19 @@ function onCheck(event, resourceTree, treeNode){
 		}
 	}
 } 
-
-
-
 /**
- * 过滤查询需勾选的节点
- * @param node
- * @returns {Boolean}
+ * 简介 超过字数截取并增加省略号
+ * @param content
+ * @returns
  */
-function filter(node){
-		var flag;
-		 for(i=0;i<globeData[0].jrole.length;i++){
-	     flag=(node.id==globeData[0].jrole[i].roleId);
-	     if(flag==true){
-	    	 return flag;
-	     }
-		 }
-		
-	} 
+function intro(content){
+	if(content.length>50){
+		return content.substring(0,50)+"...";
+	}else{
+		return content;
+	}
+	
+	
+}
+
+

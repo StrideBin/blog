@@ -12,4 +12,6 @@ import com.lb.blog.dto.SpringDataPageable;
 public interface PageService {
 	
 	public Page<PageDto> queryAll(SpringDataPageable springDataPageable);
+	
+	public boolean insertPage(PageDto pageDto);
 }
