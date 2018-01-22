@@ -51,7 +51,7 @@
 	line-height: 20px;
 }
 .dateview {
-	width: 90%;
+	width: 100%;
 	overflow: hidden;
 	clear: both;
 	margin: 5px 0 0 0;
@@ -63,7 +63,7 @@
 	padding-left: 25px
 }
 .dateview span {
-	margin: 0 10px;
+	margin-left:10px;
 }
 .dateview span a {
 	color: #41607d;

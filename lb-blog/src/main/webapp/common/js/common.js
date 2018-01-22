@@ -604,8 +604,8 @@ function onCheck(event, resourceTree, treeNode){
  * @returns
  */
 function intro(content){
-	if(content.length>50){
-		return content.substring(0,50)+"...";
+	if(content.length>150){
+		return content.substring(0,150)+"...";
 	}else{
 		return content;
 	}
