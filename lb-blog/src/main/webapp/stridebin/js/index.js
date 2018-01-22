@@ -47,15 +47,13 @@ function searchFormSubmit() {
 								+ "<ul><p>"
 								+ intro(globeData[i].pageContent)
 								+ "</p>"
-							    + "<a class='readmore'>阅读全文"
-							    + "<span class='caret'></span>"
-							    + "</a>"
 								+ "</ul>"
-								+ "<p class='dateview'><span>"+globeData[i].insertTime+"</span>";
+								+ "<p class='dateview'><span>"+globeData[i].insertTime+"</span></p>";
 					}
 					$("#page_rows").html("");
 					$("#page_rows").prepend(row);
 					pagehelper(data.totalElements, limit,globeData.length);
+					
 
 				}
 			});

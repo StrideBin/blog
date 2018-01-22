@@ -27,4 +27,9 @@ public class MainPageController {
 		Page<PageDto> page=pageService.queryAll(springDataPageable);
 		return page;
 	}
+	@ResponseBody																	//如果不标注 前端ajax接收不到返回值
+	@RequestMapping(value = "/addPaper", method = RequestMethod.POST)
+	public Object addPaper(@RequestBody PageDto pageDto) {
+		return pageService.insertPage(pageDto);
+	}
 }

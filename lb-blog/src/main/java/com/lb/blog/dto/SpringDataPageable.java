@@ -20,7 +20,7 @@ public class SpringDataPageable implements Serializable, Pageable {
 
 	public SpringDataPageable(){
 		List<Order> orders = new ArrayList<Order>();
-		orders.add(new Order(Direction.DESC, "updateTime"));
+		orders.add(new Order(Direction.DESC, "insertTime"));
 		this.sort = new Sort(orders);
 	}
 	@Override

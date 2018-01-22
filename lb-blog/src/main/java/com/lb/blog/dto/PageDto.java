@@ -12,11 +12,18 @@ public class PageDto implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-	private String pageTitle;
-	private String pageContent;
-	private String insertTime;
-	private String updateTime;
-	private String imageAddr;
+	private String pageTitle="";
+	private String pageContent="";
+	private String insertTime="";
+	private String updateTime="";
+	private String imageAddr="";
+	private String intro="";
+	public String getIntro() {
+		return intro;
+	}
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
 	public String getPageTitle() {
 		return pageTitle;
 	}
@@ -50,6 +57,6 @@ public class PageDto implements Serializable {
 	@Override
 	public String toString() {
 		return "PageDto [id=" + id + ", pageTitle=" + pageTitle + ", pageContent=" + pageContent + ", insertTime="
-				+ insertTime + ", updateTime=" + updateTime + ", imageAddr=" + imageAddr + "]";
+				+ insertTime + ", updateTime=" + updateTime + ", imageAddr=" + imageAddr + ", intro=" + intro + "]";
 	}
 }

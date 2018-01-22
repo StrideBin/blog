@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.lb.blog.dto.PageDto;
 import com.lb.blog.dto.SpringDataPageable;
+import com.lb.blog.utils.DateUtils;
 
 /**
  * 创建人: lb  日期:2017年4月10日 下午4:59:45
@@ -25,8 +26,8 @@ public class PageServiceImpl implements PageService{
 	@Override
 	public Page<PageDto> queryAll(SpringDataPageable pageable) {
 		Query query = new Query();
-		Long count = mongoTemplate.count(query, PageDto.class, "page");
-		List<PageDto> list = mongoTemplate.find(query.with(pageable), PageDto.class, "page");
+		Long count = mongoTemplate.count(query, PageDto.class, "pageDto");
+		List<PageDto> list = mongoTemplate.find(query.with(pageable), PageDto.class, "pageDto");
 		Page<PageDto> pagelist = new PageImpl<PageDto>(list, pageable, count);
 		return pagelist;
 	}
@@ -35,6 +36,7 @@ public class PageServiceImpl implements PageService{
 	 */
 	@Override
 	public boolean insertPage(PageDto pageDto) {
+		pageDto.setInsertTime(DateUtils.getTime());
 		mongoTemplate.insert(pageDto);
 		if(StringUtils.isNotEmpty(pageDto.getId())){
 			return true;	
