@@ -38,12 +38,12 @@ function searchFormSubmit() {
 			var globeData = data.content;
 			var row = "";
 			for (var i = 0; i < globeData.length; i++) {
-				row += "<div class='rows'><h3>"
+				row += "<div class='rows' style='margin-top:20px'><h3>"
 						+ globeData[i].pageTitle + "</h3>" 
 						+ "<ul><div style='display:inline'>"
 						+ intro(globeData[i].intro) + "</div>"
 						+ "<div style='display:none'>"
-						+ globeData[i].pageContent + "<span style='margin-left:90%;font-size:18px;color:blue;cursor:pointer;'>收&nbsp&nbsp起</span></div></ul>"
+						+ globeData[i].pageContent +"</div></ul>"
 						+ "<p class='dateview'><span>"
 						+ globeData[i].insertTime + "</span></p></div>";
 			}
