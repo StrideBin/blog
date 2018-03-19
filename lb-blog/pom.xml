@@ -170,7 +170,6 @@
 			<artifactId>commons-lang3</artifactId><!-- StringUtils -->
 			<version>3.4</version>
 		</dependency>
-		
 		<!-- mongodb -->
 <!-- 		<dependency>
 		    <groupId>org.springframework.data</groupId>

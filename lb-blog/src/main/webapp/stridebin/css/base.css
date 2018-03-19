@@ -85,7 +85,7 @@ header {
 .logo {
 	padding: 50px 0 20px 20px;
 	font-size: 26px;
-	font-family: "Î¢ÈíÑÅºÚ", sans-serif;
+	font-family: KaiTi;
 	color: #333;
 	font-weight: bold;
 }
@@ -120,12 +120,12 @@ nav {
 .navigation {
 	height: 64px;
 	background: url(../images/navbg.png) no-repeat;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: Microsoft JhengHei;
 }
 .menu {
 	position: relative;
 	margin-left: 70px;
-	padding-top: 10px
+	padding-top: 10px;
 }
 .menu li {
 	float: left;

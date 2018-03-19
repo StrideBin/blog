@@ -51,12 +51,13 @@ function searchFormSubmit() {
 			$("#page_rows").prepend(row);
 			pagehelper(data.totalElements, limit, globeData.length);
 
-			$(".rows").click(function(){
-				if($(this)[0].children[1].children[0].style.display=="inline"){
-					$(this)[0].children[1].children[0].style.display="none";
-				}
-				if($(this)[0].children[1].children[1].style.display=="none"){
+			$(".rows").dblclick(function(){
+				if($(this)[0].children[1].children[1].style.display=="inline"&&$(this)[0].children[1].children[0].style.display=="none"){
+					$(this)[0].children[1].children[0].style.display="inline";
+					$(this)[0].children[1].children[1].style.display="none";
+				}else{
 					$(this)[0].children[1].children[1].style.display="inline";
+					$(this)[0].children[1].children[0].style.display="none";
 				}
 			})
 		}
