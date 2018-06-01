@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+  <header>
+    <div class="headtop"></div>
+    <div class="contenttop">
+      <div class="logo f_l">刘斌的小站</div>
+      <div class="blank"></div>
+      <nav>
+        <div  class="navigation">
+          <ul class="menu">
+            <li><a href="<%=basePath%>/stridebin/index.jsp">网站首页</a></li>
+            <li><a href="<%=basePath%>/stridebin/about.jsp">关于我</a>
+            </li>
+            <li><a href="<%=basePath%>/stridebin/newslistpic.jsp">随笔</a>
+            </li>
+            <li><a href="<%=basePath%>/stridebin/newslistpic.jsp">技术文章</a> </li>
+            <li><a href="<%=basePath%>/stridebin/editor/index.jsp">给我留言</a> </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>

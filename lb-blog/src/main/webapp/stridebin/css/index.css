@@ -1,13 +1,12 @@
 @charset "gb2312";
 .container {
 	background: rgba(204, 204, 204, 0.3);
-	width:1000px;
 	overflow: hidden;
-	margin: auto;
+	margin: 10px 100px 10px 220px;
 	border-left: #d2d2d2 1px solid;
 	border-right: #d2d2d2 1px solid;
 	border-bottom: #d2d2d2 1px solid;
-	
+	width:52%;
 }
 .blank20 {
 	height: 20px;
@@ -17,9 +16,12 @@
 /*卷轴*/
 .jztop {
 	background: url(../images/jztop.png) no-repeat;
-	width: 1034px;
-	margin: auto;
+	width: 734px;
+	margin: 10px 100px 10px 200px;
 	height: 32px;
+	background-origin:content;                /*从content区域开始显示背景*/  
+    background-position:50% 50%;              /*图片上下左右居中*/  
+    background-size:contain;                  /*保持图像本身的宽高比例，将图片缩放到宽度或高度正好适应定义背景的区域*/  
 }
 
 /*文章*/

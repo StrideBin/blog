@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name></display-name>
   <welcome-file-list>
-    <welcome-file>/stridebin/index.html</welcome-file>
+    <welcome-file>/stridebin/index.jsp</welcome-file>
   </welcome-file-list>
 	<!--    1.启动一个WEB项目的时候,容器(如:Tomcat)会去读它的配置文件web.xml.
 			     读两个节点: <listener></listener> 和 <context-param></context-param>

@@ -1,0 +1,5 @@
+<link rel="shortcut icon" href="<%=basePath%>/common/ico/bitbug_favicon16x16.ico" />
+
+<link href="<%=basePath%>/common/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+<link href="<%=basePath%>/stridebin/css/base.css" rel="stylesheet">
+<link href="<%=basePath%>/stridebin/css/index.css" rel="stylesheet">

@@ -1,0 +1,11 @@
+  <%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+</div>
+  <footer>
+    <div class="footer">
+      <div class="f_l">
+        <p>All Rights Reserved 版权所有：<a href="">刘斌的小站</a> 备案号：蜀ICP备00000000号</p>
+      </div>
+    </div>
+  </footer>
+ </div>
