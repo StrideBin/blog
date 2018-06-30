@@ -170,6 +170,13 @@
 			<artifactId>commons-lang3</artifactId><!-- StringUtils -->
 			<version>3.4</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/cn.songxinqiang/com.baidu.ueditor -->
+<dependency>
+    <groupId>cn.songxinqiang</groupId>
+    <artifactId>com.baidu.ueditor</artifactId>
+    <version>1.1.2-edit-1.0</version>
+</dependency>
+		
 		<!-- mongodb -->
 <!-- 		<dependency>
 		    <groupId>org.springframework.data</groupId>
@@ -187,11 +194,11 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.5</version>
 				<configuration>
 					<appendAssemblyId>false</appendAssemblyId> <!--打包时不带版本号 -->
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 		</plugins>

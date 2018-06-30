@@ -1,7 +1,6 @@
 package com.lb.blog.common;
 
 import java.util.PropertyResourceBundle;
-
 import org.apache.commons.lang3.StringUtils;
 
 /**
